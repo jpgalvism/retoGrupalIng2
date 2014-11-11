@@ -1,5 +1,7 @@
 package dao;
 
+import modelo.Album;
+
 public class FachadaDao implements IFachadaDao{
 
 	private DaoAlbum daoAlbum = null;
@@ -19,7 +21,19 @@ public class FachadaDao implements IFachadaDao{
 	@Override
 	public boolean isConected() {
 		// TODO Auto-generated method stub
-		return false;
+		return DataConection.getDatacon().isvalid();
+	}
+
+	@Override
+	public Album getAlbum(int id) {
+		// TODO Auto-generated method stub
+		return daoAlbum.getAlbum(id);
+	}
+
+	@Override
+	public Album getAlbum(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

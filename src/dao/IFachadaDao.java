@@ -1,5 +1,7 @@
 package dao;
 
+import modelo.Album;
+
 public interface IFachadaDao {
 	
 	/**
@@ -15,6 +17,17 @@ public interface IFachadaDao {
 	 */
 	public boolean isConected();
 	
+
+	/**
+	 * @author f5
+	 * @return objeto album que corresponde al id 
+	 */
+	public Album getAlbum(int id);
 	
+	/**
+	 * @author f5
+	 * @return objeto album que corresponde al nombre 
+	 */
+	public Album getAlbum(String name);
 	
 }
