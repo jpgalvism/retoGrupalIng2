@@ -40,7 +40,7 @@ public class DataConection {
 		
 	}
 	
-	public boolean isvalid() {
+	public String isvalid() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			
@@ -53,12 +53,12 @@ public class DataConection {
 			con = DriverManager.getConnection(url, user, password);
 			
 			System.out.println("Database connected!");
-			return true;
+			return "OK";
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Cannot connect the database!" + e.getLocalizedMessage());
 			e.printStackTrace();
-			return false;
+			return "ERROR: " + e.getMessage();
 		}
 	}
 	

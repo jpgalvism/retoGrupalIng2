@@ -15,12 +15,12 @@ public interface IFachadaDao {
 	 * @author f5
 	 * @return true si puede establecer conexion con la base de datos, false en caso contrario
 	 */
-	public boolean isConected();
+	public String isConected();
 	
 
 	/**
 	 * @author f5
-	 * @return objeto album que corresponde al id 
+	 * @return objeto album que corresponded al id 
 	 */
 	public Album getAlbum(int id);
 	
@@ -29,5 +29,15 @@ public interface IFachadaDao {
 	 * @return objeto album que corresponde al nombre 
 	 */
 	public Album getAlbum(String name);
+	
+	
+	/**
+	 * @author f5
+	 * @return true en caso de guardar correctamente el album, false en caso contrario
+	 */
+	public String addAlbum(Album album);
+	
+	
+	
 	
 }
