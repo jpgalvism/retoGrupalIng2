@@ -5,9 +5,9 @@ import java.sql.ResultSet;
 
 import modelo.Album;
 
-public class DaoAlbum {
+class DaoAlbum {
 
-	public Album getAlbum(int id) {
+	Album getAlbum(int id) {
 		Album album = null;
 		String sql;
 		Connection conn;
@@ -17,7 +17,7 @@ public class DaoAlbum {
 
 			conn = DataConection.getDatacon().getCon();
 
-			sql = "SELECT * FROM retogrupal.album where id ='" + id + "';";
+			sql = "SELECT * FROM  `retogrupal`.`album` where id ='" + id + "';";
 
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
 
@@ -49,7 +49,7 @@ public class DaoAlbum {
 		return null;
 	}
 
-	public Album getAlbum(String name) {
+	Album getAlbum(String name) {
 		Album album = null;
 		String sql;
 		Connection conn;
@@ -59,7 +59,8 @@ public class DaoAlbum {
 
 			conn = DataConection.getDatacon().getCon();
 
-			sql = "SELECT * FROM retogrupal.album where name ='" + name + "';";
+			sql = "SELECT * FROM   `retogrupal`.`album` where nombre ='" + name
+					+ "';";
 
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
 
@@ -91,7 +92,7 @@ public class DaoAlbum {
 		return null;
 	}
 
-	public String addAlbum(Album album) {
+	String addAlbum(Album album) {
 		String sql;
 		Connection conn = null;
 		ResultSet result = null;
@@ -102,7 +103,7 @@ public class DaoAlbum {
 
 			conn.setAutoCommit(false);
 
-			sql = "SELECT count(id) as cant FROM  `retogrupal`.`album` where name ='"
+			sql = "SELECT count(id) as cant FROM  `retogrupal`.`album` where nombre ='"
 					+ album.getName() + "';";
 
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);

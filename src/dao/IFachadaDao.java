@@ -1,15 +1,14 @@
 package dao;
 
+import java.util.ArrayList;
+
 import modelo.Album;
+import modelo.Cancion;
+import modelo.Interprete;
 
 public interface IFachadaDao {
 	
-	/**
-	 * @author f5
-	 * @return instancia unica de la fachada
-	 */
-	public FachadaDao getFachada();
-	
+
 	
 	/**
 	 * @author f5
@@ -20,7 +19,7 @@ public interface IFachadaDao {
 
 	/**
 	 * @author f5
-	 * @return objeto album que corresponded al id 
+	 * @return album que corresponded al id 
 	 */
 	public Album getAlbum(int id);
 	
@@ -39,5 +38,46 @@ public interface IFachadaDao {
 	
 	
 	
+	/**
+	 * @author f5
+	 * @return cancion que corresponde al id 
+	 */
+	public Cancion getCancion(int id);
+	
+	
+	/**
+	 * @author f5
+	 * @return cancion que corresponde al id 
+	 */
+	public Cancion getCancion(String name);
+	
+	
+	
+	/**
+	 * @author f5 
+	 * @return lista de canciones que coincida en parte con el @param likeName  
+	 */
+	public ArrayList<Cancion> getListCancion(String likeName);
+	
+	
+	/**
+	 * @author f5 
+	 * @return lista de interpretes que coincida en parte con el @param likeName  
+	 */
+	public ArrayList<Interprete> getListInterprete(String likeName);
+	
+	
+	/**
+	 * @author f5
+	 * @return interprete que corresponde al id 
+	 */
+	public Interprete getInterprete(int id);
+	
+	
+	/**
+	 * @author f5
+	 * @return interprete que corresponde al id 
+	 */
+	public  Interprete getInterprete(String name);
 	
 }
