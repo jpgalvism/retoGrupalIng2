@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import modelo.Album;
 import modelo.Cancion;
 import modelo.Interprete;
 
@@ -144,47 +145,77 @@ class DaoCancion {
 
 		String sql;
 		Connection conn = null;
-		ArrayList<Interprete> listInterpreteNuevos = null;
-		DaoInterprete daoInterprete = null;
+		Cancion tempCancion = null;
 		try {
 
-			daoInterprete = new DaoInterprete();
+			if (cancion.getListInterpreteNuevo().size() == 0)
+				return false;
 
 			conn = DataConection.getDatacon().getCon();
-
 			if (getCancion(cancion.getName()) != null) {
 				return false;
 			}
-
 			sql = "INSERT INTO `retogrupal`.`cancion`(`nombre`) VALUES( " + "'"
 					+ cancion.getName() + "');";
-
 			if (!DataConection.getDatacon().execute_Ins_Upd_Del_Sql(conn, sql)) {
 				System.out
 						.println("addInterprete--Error al crear el interprete");
 				return false;
 			}
+			// actualizo el id objeto
+			tempCancion = getCancion(cancion.getName());
+			cancion.setId(tempCancion.getId());
+			if (!addInterpretesCancion(cancion)) {
+				return false;
+			}
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("addInterprete--Error:"
+					+ e.getLocalizedMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-			System.out.println("interprete creado exitosamente.");
-
-			listInterpreteNuevos = cancion.getListInterpreteNuevo();
-
-			// actualizo el objeto
-			cancion = getCancion(cancion.getName());
-
-			for (Interprete interprete : listInterpreteNuevos) {
+	private boolean addInterpretesCancion(Cancion cancion) {
+		DaoInterprete daoInterprete = new DaoInterprete();
+		try {
+			for (Interprete interprete : cancion.getListInterpreteNuevo()) {
 				if (interprete.getId() == -1) {
 					if (!daoInterprete.addInterprete(interprete))
 						return false;
 				}
-
+				if (!addInterpreteCancion(cancion, interprete))
+					return false;
 			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
+	private boolean addInterpreteCancion(Cancion cancion, Interprete interprete) {
+		String sql;
+		Connection conn = null;
+		try {
+			conn = DataConection.getDatacon().getCon();
+			sql = "INSERT INTO `retogrupal`.`interpretexcancion`(`cancion_id`,`interprete_id`) VALUES( "
+					+ "'"
+					+ cancion.getId()
+					+ "','"
+					+ interprete.getId()
+					+ "');";
+			if (!DataConection.getDatacon().execute_Ins_Upd_Del_Sql(conn, sql)) {
+				System.out
+						.println("addInterpreteCancion--Error al crear el interprete");
+				return false;
+			}
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
-
-			System.out.println("addInterprete--Error:"
+			System.out.println("addInterpreteCancion--Error:"
 					+ e.getLocalizedMessage());
 			e.printStackTrace();
 			return false;

@@ -2,8 +2,11 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import modelo.Album;
+import modelo.Cancion;
+import modelo.Interprete;
 
 class DaoAlbum {
 
@@ -12,24 +15,17 @@ class DaoAlbum {
 		String sql;
 		Connection conn;
 		ResultSet result = null;
-
 		try {
-
 			conn = DataConection.getDatacon().getCon();
-
 			sql = "SELECT * FROM  `retogrupal`.`album` where id ='" + id + "';";
-
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
-
 			if (result != null) {
 				if (result.next()) {
-
 					album = new Album();
 					album.setId(result.getInt("id"));
 					album.setName(result.getString("nombre"));
 				}
 			}
-
 			if (result != null)
 				result.close();
 			return album;
@@ -54,25 +50,18 @@ class DaoAlbum {
 		String sql;
 		Connection conn;
 		ResultSet result = null;
-
 		try {
-
 			conn = DataConection.getDatacon().getCon();
-
 			sql = "SELECT * FROM   `retogrupal`.`album` where nombre ='" + name
 					+ "';";
-
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
-
 			if (result != null) {
 				if (result.next()) {
-
 					album = new Album();
 					album.setId(result.getInt("id"));
 					album.setName(result.getString("nombre"));
 				}
 			}
-
 			if (result != null)
 				result.close();
 			return album;
@@ -96,71 +85,115 @@ class DaoAlbum {
 		String sql;
 		Connection conn = null;
 		ResultSet result = null;
-
+		Album tempAlbum = null;
 		try {
-
+			
+			if (album.getListCancion().size() == 0)
+			{
+				return "ERROR: al adicionar el álbum, no existe canciones asociadas";
+			}
+			
 			conn = DataConection.getDatacon().getCon();
-
 			conn.setAutoCommit(false);
-
+			conn.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
+			
 			sql = "SELECT count(id) as cant FROM  `retogrupal`.`album` where nombre ='"
 					+ album.getName() + "';";
-
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
-
+			
 			if (result.next()) {
 				if (result.getInt("cant") > 0) {
 					System.out.println("addAlbum-- el album a crear ya existe");
-
 					conn.rollback();
 					conn.setAutoCommit(true);
 					return "ERROR: el álbum a adicionar ya existe";
 				}
 			}
-
+			
 			if (result != null)
 				result.close();
-
 			sql = "INSERT INTO `retogrupal`.`album`(`nombre`) VALUES( " + "'"
 					+ album.getName() + "');";
-
 			if (!DataConection.getDatacon().execute_Ins_Upd_Del_Sql(conn, sql)) {
 				System.out.println("addAlbum--Error al crear el album");
 				conn.rollback();
 				conn.setAutoCommit(true);
 				return "ERROR: al adicionar el álbum";
 			}
-
+			
 			// agregar parte de adicionar cancion
-
+			tempAlbum = getAlbum(album.getName());
+			album.setId(tempAlbum.getId());
+			
+		
+			
+			if (!addCancionesAlbum(album)) {
+				conn.rollback();
+				conn.setAutoCommit(true);
+				return "ERROR: al adicionar el álbum";
+			}
+			
 			System.out.println("album creado exitosamente.");
-
 			conn.commit();
 			conn.setAutoCommit(true);
-
 			return "OK";
 		} catch (Exception e) {
 			// TODO: handle exception
 			try {
 				conn.rollback();
 				conn.setAutoCommit(true);
-
 				System.out
 						.println("addAlbum--Error:" + e.getLocalizedMessage());
 				e.printStackTrace();
-
 				if (result != null)
 					result.close();
-
 				return "ERROR: al adicionar el álbum; " + e.getMessage();
-
 			} catch (Exception e1) {
 				// TODO: handle exception
 				e1.printStackTrace();
 				return "ERROR: al adicionar el álbum; " + e1.getMessage();
-
 			}
 		}
-
 	}
+
+	private boolean addCancionesAlbum(Album album) {
+		DaoCancion daoCancion = new DaoCancion();
+		try {
+			for (Cancion cancion : album.getListCancion()) {
+				if (cancion.getId() == -1) {
+					if (!daoCancion.addCancion(cancion))
+						return false;
+				}
+				if (!addCancionAlbum(album, cancion))
+					return false;
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	private boolean addCancionAlbum(Album album, Cancion cancion) {
+		String sql;
+		Connection conn = null;
+		try {
+			conn = DataConection.getDatacon().getCon();
+			sql = "INSERT INTO `retogrupal`.`cancionxalbum`(`cancion_id`,`album_id`) VALUES( "
+					+ "'" + cancion.getId() + "','" + album.getId() + "');";
+			if (!DataConection.getDatacon().execute_Ins_Upd_Del_Sql(conn, sql)) {
+				System.out
+						.println("addCancionAlbum--Error al crear el interprete");
+				return false;
+			}
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("addCancionAlbum--Error:"
+					+ e.getLocalizedMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 }
