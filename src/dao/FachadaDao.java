@@ -17,6 +17,7 @@ public class FachadaDao implements IFachadaDao {
 	private FachadaDao() {
 		daoAlbum = new DaoAlbum();
 		daoCancion = new DaoCancion();
+		daoInterprete = new DaoInterprete();
 	}
 
 	public static IFachadaDao getFachada() {
