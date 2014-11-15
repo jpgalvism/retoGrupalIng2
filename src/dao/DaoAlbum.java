@@ -97,7 +97,7 @@ class DaoAlbum {
 			conn.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
 
 			sql = "SELECT count(id) as cant FROM  `retogrupal`.`album` where nombre ='"
-					+ album.getName() + "';";
+					+ album.getName() + "' COLLATE latin1_general_cs;";
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
 
 			if (result.next()) {
