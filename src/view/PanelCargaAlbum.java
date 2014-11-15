@@ -1,4 +1,9 @@
 package view;
+import java.awt.FileDialog;
+import java.awt.Frame;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -24,6 +29,18 @@ public class PanelCargaAlbum extends JPanel {
 		textField.setColumns(10);
 		
 		JButton btnExaminar = new JButton("Examinar");
+		btnExaminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				FileDialog dialogoArchivo;
+
+				Frame frame = null;
+				dialogoArchivo = new FileDialog(frame,
+						"Seleccione el archivo de votos para Álbum", FileDialog.LOAD);
+				dialogoArchivo.show();
+				textField.setText(dialogoArchivo.getFile());
+			}
+		});
 		btnExaminar.setBounds(401, 71, 117, 25);
 		add(btnExaminar);
 		
