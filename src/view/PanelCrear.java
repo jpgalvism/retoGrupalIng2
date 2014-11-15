@@ -9,7 +9,6 @@ import javax.swing.JMenu;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import control.ControlAgregar;
 
 public class PanelCrear extends JPanel {
 	private JTextField textField;

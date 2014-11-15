@@ -7,9 +7,7 @@ import modelo.Cancion;
 import modelo.Interprete;
 
 public interface IFachadaDao {
-	
-
-	
+		
 	/**
 	 * @author f5
 	 * @return true si puede establecer conexion con la base de datos, false en caso contrario
@@ -25,6 +23,7 @@ public interface IFachadaDao {
 	
 	/**
 	 * @author f5
+	 * @param name  nombre del album a buscar
 	 * @return objeto album que corresponde al nombre 
 	 */
 	public Album getAlbum(String name);
@@ -32,6 +31,7 @@ public interface IFachadaDao {
 	
 	/**
 	 * @author f5
+	 * @param album objeto albun a adicionar
 	 * @return true en caso de guardar correctamente el album, false en caso contrario
 	 */
 	public String addAlbum(Album album);
@@ -40,6 +40,7 @@ public interface IFachadaDao {
 	
 	/**
 	 * @author f5
+	 * @param id identificador de la cancion
 	 * @return cancion que corresponde al id 
 	 */
 	public Cancion getCancion(int id);
@@ -47,6 +48,7 @@ public interface IFachadaDao {
 	
 	/**
 	 * @author f5
+	 * @param name nombre de cancion
 	 * @return cancion que corresponde al id 
 	 */
 	public Cancion getCancion(String name);
@@ -55,6 +57,7 @@ public interface IFachadaDao {
 	
 	/**
 	 * @author f5 
+	 * @param likeName parte de nombre de cancion a coincidir
 	 * @return lista de canciones que coincida en parte con el @param likeName  
 	 */
 	public ArrayList<Cancion> getListCancion(String likeName);
