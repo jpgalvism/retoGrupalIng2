@@ -1,33 +1,36 @@
 package modelo;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class Cancion {
-	
-	private int id  = -1;
+
+	private int id = -1;
 	private String name;
-	private LinkedList<Interprete> listInterprete;
-	
-	
+	private ArrayList<Interprete> listInterpreteNuevo = new ArrayList<Interprete>();
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public LinkedList<Interprete> getListInterprete() {
-		return listInterprete;
+
+	public ArrayList<Interprete> getListInterpreteNuevo() {		
+		return listInterpreteNuevo;
 	}
-	public void setListInterprete(LinkedList<Interprete> listInterprete) {
-		this.listInterprete = listInterprete;
+
+	public void addInterpreteNuevo(Interprete interprete)
+	{
+		listInterpreteNuevo.add(interprete);
 	}
-	
-	
 
 }
