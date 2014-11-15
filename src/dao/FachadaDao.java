@@ -87,4 +87,10 @@ public class FachadaDao implements IFachadaDao {
 		return daoInterprete.getInterprete(name);
 	}
 
+	@Override
+	public ArrayList<Album> getListAlbum(String likeName) {
+		// TODO Auto-generated method stub
+		return daoAlbum.getListAlbum(likeName);
+	}
+
 }

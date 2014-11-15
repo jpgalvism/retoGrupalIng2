@@ -53,7 +53,7 @@ class DaoAlbum {
 		try {
 			conn = DataConection.getDatacon().getCon();
 			sql = "SELECT * FROM   `retogrupal`.`album` where nombre ='" + name
-					+ "';";
+					+ "' COLLATE latin1_general_cs;";
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
 			if (result != null) {
 				if (result.next()) {
@@ -87,20 +87,19 @@ class DaoAlbum {
 		ResultSet result = null;
 		Album tempAlbum = null;
 		try {
-			
-			if (album.getListCancion().size() == 0)
-			{
+
+			if (album.getListCancion().size() == 0) {
 				return "ERROR: al adicionar el álbum, no existe canciones asociadas";
 			}
-			
+
 			conn = DataConection.getDatacon().getCon();
 			conn.setAutoCommit(false);
 			conn.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
-			
+
 			sql = "SELECT count(id) as cant FROM  `retogrupal`.`album` where nombre ='"
 					+ album.getName() + "';";
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
-			
+
 			if (result.next()) {
 				if (result.getInt("cant") > 0) {
 					System.out.println("addAlbum-- el album a crear ya existe");
@@ -109,7 +108,7 @@ class DaoAlbum {
 					return "ERROR: el álbum a adicionar ya existe";
 				}
 			}
-			
+
 			if (result != null)
 				result.close();
 			sql = "INSERT INTO `retogrupal`.`album`(`nombre`) VALUES( " + "'"
@@ -120,19 +119,17 @@ class DaoAlbum {
 				conn.setAutoCommit(true);
 				return "ERROR: al adicionar el álbum";
 			}
-			
+
 			// agregar parte de adicionar cancion
 			tempAlbum = getAlbum(album.getName());
 			album.setId(tempAlbum.getId());
-			
-		
-			
+
 			if (!addCancionesAlbum(album)) {
 				conn.rollback();
 				conn.setAutoCommit(true);
 				return "ERROR: al adicionar el álbum";
 			}
-			
+
 			System.out.println("album creado exitosamente.");
 			conn.commit();
 			conn.setAutoCommit(true);
@@ -194,6 +191,51 @@ class DaoAlbum {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	ArrayList<Album> getListAlbum(String likeName) {
+		Album album = null;
+		String sql;
+		Connection conn;
+		ResultSet result = null;
+		ArrayList<Album> listAlbum = null;
+		try {
+
+			conn = DataConection.getDatacon().getCon();
+			listAlbum = new ArrayList<Album>();
+
+			sql = "SELECT * FROM  `retogrupal`.`album` where nombre like '%"
+					+ likeName + "%' COLLATE latin1_general_cs LIMIT 10;";
+
+			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
+
+			if (result != null) {
+				while (result.next()) {
+					album = new Album();
+					album.setId(result.getInt("id"));
+					album.setName(result.getString("nombre"));
+					listAlbum.add(album);
+				}
+			}
+
+			if (result != null)
+				result.close();
+
+			return listAlbum;
+		} catch (Exception e) {
+			// TODO: handle exception
+			try {
+				System.out.println("getListAlbum--Error:"
+						+ e.getLocalizedMessage());
+				e.printStackTrace();
+				if (result != null)
+					result.close();
+			} catch (Exception e1) {
+				// TODO: handle exception
+				e1.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 }
