@@ -64,7 +64,7 @@ class DaoInterprete {
 			conn = DataConection.getDatacon().getCon();
 
 			sql = "SELECT * FROM  `retogrupal`.`interprete` where nombre ='"
-					+ name + "';";
+					+ name + "'COLLATE latin1_general_cs;";
 
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
 
@@ -110,7 +110,7 @@ class DaoInterprete {
 			listInterprete = new ArrayList<Interprete>();
 
 			sql = "SELECT * FROM  `retogrupal`.`interprete` where nombre like '%"
-					+ likeName + "%' LIMIT 10;";
+					+ likeName + "%' COLLATE latin1_general_cs LIMIT 10;";
 
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
 
