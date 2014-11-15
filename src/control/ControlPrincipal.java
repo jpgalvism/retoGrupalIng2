@@ -1,5 +1,8 @@
 package control;
 
+import java.util.ArrayList;
+
+import modelo.Cancion;
 import view.FachadaP;
 import dao.FachadaDao;
 import dao.IFachadaDao;
@@ -12,6 +15,8 @@ public class ControlPrincipal {
 		
 	}
 	
-	
+	public ArrayList<Cancion> listacanciones(String likeName){
+		return dao.getListCancion(likeName);
+	}
 
 }
