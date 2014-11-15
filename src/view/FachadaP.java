@@ -2,29 +2,37 @@ package view;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
 import java.awt.CardLayout;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import control.ControlPrincipal;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
 public class FachadaP {
 
-	public JFrame frame;
+	public static JFrame frame;
 	public static JPanel panel;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					FachadaP window = new FachadaP();
 					window.frame.setVisible(true);
+					
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,6 +46,7 @@ public class FachadaP {
 	 */
 	public FachadaP() {
 		initialize();
+		
 	}
 
 	/**
@@ -165,6 +174,11 @@ public class FachadaP {
 			}
 		});
 		mnReportes.add(mntmReportePorlbum);
+		ControlPrincipal cp = new ControlPrincipal();
+		String response = cp.isConnected();
+		//if (!response.equals("OK")) {
+			
+		//}
 	}
 
 }
