@@ -2,28 +2,37 @@ package view;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
 import java.awt.CardLayout;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import control.ControlPrincipal;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
 public class FachadaP {
 
-	private JFrame frame;
+	public static JFrame frame;
+	public static JPanel panel;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					FachadaP window = new FachadaP();
 					window.frame.setVisible(true);
+					window.isConnected();
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,11 +41,21 @@ public class FachadaP {
 		});
 	}
 
+	protected void isConnected() {
+		ControlPrincipal cp = new ControlPrincipal();
+		String response = cp.isConnected();
+		if (!response.equals("OK")) {
+			JOptionPane.showMessageDialog(null, "prueba");
+		}
+		
+	}
+
 	/**
 	 * Create the application.
 	 */
 	public FachadaP() {
 		initialize();
+		
 	}
 
 	/**
@@ -48,8 +67,11 @@ public class FachadaP {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		
-		final JPanel panel = new JPanel(new CardLayout());
+		panel = new JPanel(new CardLayout());
 		frame.getContentPane().add(panel, "name_30760566072360");
+		
+		JPanel panel_0 = new PanelPrincipal();
+		panel.add(panel_0, "PanelPrincipal");
 		
 		JPanel panel_1 = new PanelCrear();
 		panel.add(panel_1, "PanelCrear");
@@ -66,21 +88,35 @@ public class FachadaP {
 		JPanel panel_5 = new PanelCargaAlbum();
 		panel.add(panel_5,"PanelCargaAlbum");
 		
+		JPanel panel_6 = new PanelReportePorAlbum();
+		panel.add(panel_6,"PanelReportePorAlbum");
+		
+		JPanel panel_7 = new PanelReporteAlbumPorFecha();
+		panel.add(panel_7,"PanelReporteAlbumPorFecha");
+		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenu mnCrear = new JMenu("Crear");
-		menuBar.add(mnCrear);
+		JMenu mnPrincipal = new JMenu("Principal");
+		mnPrincipal.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				CardLayout cl = (CardLayout)(panel.getLayout());
+			      cl.show(panel, "PanelPrincipal");
+			}
+		});
+		menuBar.add(mnPrincipal);
 		
-		JMenuItem mntmCrear = new JMenuItem("Crear");
-		mntmCrear.addMouseListener(new MouseAdapter() {
+		JMenu mnCrear = new JMenu("Crear");
+		mnCrear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				CardLayout cl = (CardLayout)(panel.getLayout());
 			      cl.show(panel, "PanelCrear");
 			}
 		});
-		mnCrear.add(mntmCrear);
+		menuBar.add(mnCrear);
+		
 		
 		JMenu mnCargaDeVotos = new JMenu("Carga de Votos");
 		menuBar.add(mnCargaDeVotos);
@@ -128,11 +164,26 @@ public class FachadaP {
 		});
 		
 		JMenuItem mntmReporteDeSencillos = new JMenuItem("Reporte de Sencillos de un Álbum");
+		mntmReporteDeSencillos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				CardLayout cl = (CardLayout)(panel.getLayout());
+			      cl.show(panel, "PanelReportePorAlbum");
+			}
+		});
 		mnReportes.add(mntmReporteDeSencillos);
 		mnReportes.add(mntmReportePorCancin);
 		
 		JMenuItem mntmReportePorlbum = new JMenuItem("Reporte por Álbum (Rango de Fechas)");
+		mntmReportePorlbum.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				CardLayout cl = (CardLayout)(panel.getLayout());
+			      cl.show(panel, "PanelReporteAlbumPorFecha");
+			}
+		});
 		mnReportes.add(mntmReportePorlbum);
+		
 	}
 
 }

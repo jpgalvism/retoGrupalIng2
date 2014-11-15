@@ -6,6 +6,10 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+import control.ControlAgregar;
 
 public class PanelCrear extends JPanel {
 	private JTextField textField;
@@ -20,18 +24,29 @@ public class PanelCrear extends JPanel {
 	public PanelCrear() {
 		setLayout(null);
 		
-		JLabel label = new JLabel("Nombre del Ãlbum");
+		JLabel label = new JLabel("Nombre del Álbum");
 		label.setBounds(12, 12, 170, 15);
 		add(label);
 		
 		textField = new JTextField();
+		textField.getDocument().addDocumentListener(new DocumentListener() {
+			  public void changedUpdate(DocumentEvent e) {
+			    warn();
+			  }
+			  public void removeUpdate(DocumentEvent e) {
+			    warn();
+			  }
+			  public void insertUpdate(DocumentEvent e) {
+			    warn();
+			  }
+
+			  public void warn() {
+			     
+			  }
+			});
 		textField.setColumns(10);
 		textField.setBounds(12, 39, 206, 19);
 		add(textField);
-		
-		JButton button = new JButton("Comprobar Disponibilidad");
-		button.setBounds(230, 36, 235, 25);
-		add(button);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
@@ -50,7 +65,7 @@ public class PanelCrear extends JPanel {
 		list.setBounds(11, 116, 345, 73);
 		add(list);
 		
-		JLabel label_2 = new JLabel("AÃ±adir canciÃ³n existente (ID)");
+		JLabel label_2 = new JLabel("Añadir canción existente (ID)");
 		label_2.setBounds(11, 216, 235, 15);
 		add(label_2);
 		
@@ -63,11 +78,11 @@ public class PanelCrear extends JPanel {
 		textField_2.setBounds(11, 255, 206, 19);
 		add(textField_2);
 		
-		JButton button_2 = new JButton("AÃ±adir");
+		JButton button_2 = new JButton("Añadir");
 		button_2.setBounds(11, 279, 117, 25);
 		add(button_2);
 		
-		JLabel label_4 = new JLabel("AÃ±adir canciÃ³n nueva");
+		JLabel label_4 = new JLabel("Añadir canción nueva");
 		label_4.setBounds(11, 316, 206, 15);
 		add(label_4);
 		
