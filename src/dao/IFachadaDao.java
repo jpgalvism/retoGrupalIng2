@@ -30,6 +30,14 @@ public interface IFachadaDao {
 	
 	
 	/**
+	 * @author f5 
+	 * @param likeName parte de nombre de album a coincidir
+	 * @return lista de albumnes que coincida en parte con el @param likeName  
+	 */
+	public ArrayList<Album> getListAlbum(String likeName);
+	
+	
+	/**
 	 * @author f5
 	 * @param album objeto albun a adicionar
 	 * @return true en caso de guardar correctamente el album, false en caso contrario

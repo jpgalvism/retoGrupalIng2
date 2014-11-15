@@ -45,9 +45,9 @@ public class FachadaP {
 		ControlPrincipal cp = new ControlPrincipal();
 		String response = cp.isConnected();
 		if (!response.equals("OK")) {
-			JOptionPane.showMessageDialog(null, "ERROR: No se puede abrir conexión a la base de datos, por favor verifique los parametros de conexión. \n" + response, "Conexión BD",
+			JOptionPane.showMessageDialog(null, "ERROR: No se puede abrir conexiÃ³n a la base de datos, por favor verifique los parametros de conexiÃ³n. \n" + response, "ConexiÃ³n BD",
 					JOptionPane.ERROR_MESSAGE);
-			frame.dispose();
+			//frame.dispose();
 		}
 
 	}
@@ -122,7 +122,7 @@ public class FachadaP {
 		JMenu mnCargaDeVotos = new JMenu("Carga de Votos");
 		menuBar.add(mnCargaDeVotos);
 
-		JMenuItem mntmCargaDeVotos_1 = new JMenuItem("Carga de Votos Álbum");
+		JMenuItem mntmCargaDeVotos_1 = new JMenuItem("Carga de Votos Ã�lbum");
 		mntmCargaDeVotos_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -132,7 +132,7 @@ public class FachadaP {
 		});
 		mnCargaDeVotos.add(mntmCargaDeVotos_1);
 
-		JMenuItem mntmCargaDeVotos = new JMenuItem("Carga de Votos Canción");
+		JMenuItem mntmCargaDeVotos = new JMenuItem("Carga de Votos CanciÃ³n");
 		mntmCargaDeVotos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -146,7 +146,7 @@ public class FachadaP {
 		menuBar.add(mnReportes);
 
 		JMenuItem mntmReportePorIntrprete = new JMenuItem(
-				"Reporte por Intérprete");
+				"Reporte por IntÃ©rprete");
 		mntmReportePorIntrprete.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -157,7 +157,7 @@ public class FachadaP {
 		mnReportes.add(mntmReportePorIntrprete);
 
 		JMenuItem mntmReportePorCancin = new JMenuItem(
-				"Reporte por Canción (Rango de Fechas)");
+				"Reporte por CanciÃ³n (Rango de Fechas)");
 		mntmReportePorCancin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -167,7 +167,7 @@ public class FachadaP {
 		});
 
 		JMenuItem mntmReporteDeSencillos = new JMenuItem(
-				"Reporte de Sencillos de un Álbum");
+				"Reporte de Sencillos de un Ã�lbum");
 		mntmReporteDeSencillos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -179,7 +179,7 @@ public class FachadaP {
 		mnReportes.add(mntmReportePorCancin);
 
 		JMenuItem mntmReportePorlbum = new JMenuItem(
-				"Reporte por Álbum (Rango de Fechas)");
+				"Reporte por Ã�lbum (Rango de Fechas)");
 		mntmReportePorlbum.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
