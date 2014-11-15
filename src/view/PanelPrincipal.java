@@ -1,12 +1,11 @@
 package view;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-
 import java.awt.CardLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 
 public class PanelPrincipal extends JPanel {
@@ -90,6 +89,7 @@ public class PanelPrincipal extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				CardLayout cl = (CardLayout)(FachadaP.panel.getLayout());
 			      cl.show(FachadaP.panel, "PanelReporteAlbumPorFecha");
+				
 			}
 		});
 		btnReportePorlbum_1.setBounds(121, 363, 346, 25);

@@ -32,13 +32,22 @@ public class FachadaP {
 				try {
 					FachadaP window = new FachadaP();
 					window.frame.setVisible(true);
-					
+					window.isConnected();
 					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+	}
+
+	protected void isConnected() {
+		ControlPrincipal cp = new ControlPrincipal();
+		String response = cp.isConnected();
+		if (!response.equals("OK")) {
+			JOptionPane.showMessageDialog(null, "prueba");
+		}
+		
 	}
 
 	/**
@@ -174,11 +183,7 @@ public class FachadaP {
 			}
 		});
 		mnReportes.add(mntmReportePorlbum);
-		ControlPrincipal cp = new ControlPrincipal();
-		String response = cp.isConnected();
-		//if (!response.equals("OK")) {
-			
-		//}
+		
 	}
 
 }
