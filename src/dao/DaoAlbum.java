@@ -52,8 +52,8 @@ class DaoAlbum {
 		ResultSet result = null;
 		try {
 			conn = DataConection.getDatacon().getCon();
-			sql = "SELECT * FROM   `retogrupal`.`album` where nombre ='" + name
-					+ "' COLLATE latin1_general_cs;";
+			sql = "SELECT * FROM   `retogrupal`.`album` where convert(nombre using latin1) collate latin1_general_cs ='" + name
+					+ "';";
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
 			if (result != null) {
 				if (result.next()) {
@@ -96,8 +96,9 @@ class DaoAlbum {
 			conn.setAutoCommit(false);
 			conn.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
 
-			sql = "SELECT count(id) as cant FROM  `retogrupal`.`album` where nombre ='"
-					+ album.getName() + "' COLLATE latin1_general_cs;";
+			sql = "SELECT count(id) as cant FROM  `retogrupal`.`album` where convert(nombre using latin1) collate latin1_general_cs ='"
+					+ album.getName() + "';";
+			
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
 
 			if (result.next()) {
@@ -111,8 +112,10 @@ class DaoAlbum {
 
 			if (result != null)
 				result.close();
+			
 			sql = "INSERT INTO `retogrupal`.`album`(`nombre`) VALUES( " + "'"
 					+ album.getName() + "');";
+			
 			if (!DataConection.getDatacon().execute_Ins_Upd_Del_Sql(conn, sql)) {
 				System.out.println("addAlbum--Error al crear el album");
 				conn.rollback();
@@ -204,8 +207,8 @@ class DaoAlbum {
 			conn = DataConection.getDatacon().getCon();
 			listAlbum = new ArrayList<Album>();
 
-			sql = "SELECT * FROM  `retogrupal`.`album` where nombre like '%"
-					+ likeName + "%' COLLATE latin1_general_cs LIMIT 10;";
+			sql = "SELECT * FROM  `retogrupal`.`album` where convert(nombre using latin1) collate latin1_general_cs like '%"
+					+ likeName + "%' LIMIT 10;";
 
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
 

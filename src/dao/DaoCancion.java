@@ -35,7 +35,7 @@ class DaoCancion {
 
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
 			interpretes = "";
-			
+
 			while (result.next()) {
 				interpretes += result.getString("nombre");
 			}
@@ -89,6 +89,10 @@ class DaoCancion {
 			if (result != null)
 				result.close();
 
+			if (cancion == null)
+				return null;
+			
+			
 			sql = "SELECT inter.`nombre` FROM `retogrupal`.`interpretexcancion` as cinter INNER JOIN `retogrupal`.`interprete` as inter ON cinter.`interprete_id` = inter.`id` WHERE cinter.`cancion_id` = '"
 					+ cancion.getId() + "';";
 
