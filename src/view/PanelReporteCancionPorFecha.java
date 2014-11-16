@@ -14,6 +14,8 @@ import javax.swing.event.DocumentListener;
 
 import modelo.Cancion;
 import control.ControlPrincipal;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelReporteCancionPorFecha extends JPanel {
 	private JTextField textField;
@@ -35,31 +37,19 @@ public class PanelReporteCancionPorFecha extends JPanel {
 		add(list);
 
 		textField = new JTextField();
-		textField.getDocument().addDocumentListener(new DocumentListener() {
-			public void changedUpdate(DocumentEvent e) {
-				list();
-			}
-
-			public void removeUpdate(DocumentEvent e) {
-				list();
-			}
-
-			public void insertUpdate(DocumentEvent e) {
-				list();
-			}
-
-			public void list() {
-				lista = cp.listacanciones(textField.getText());
-				fillList(lista);
-			}
-
-			
-		});
+		
 		textField.setColumns(10);
 		textField.setBounds(13, 57, 208, 19);
 		add(textField);
 
 		JButton button = new JButton("Buscar");
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				lista = cp.listSongs(textField.getText());
+				fillList(lista);
+			}
+		});
 		button.setBounds(229, 54, 117, 25);
 		add(button);
 

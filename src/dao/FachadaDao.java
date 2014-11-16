@@ -1,16 +1,27 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import modelo.Album;
 import modelo.Cancion;
 import modelo.Interprete;
+import modelo.VotoAlbum;
+import modelo.VotoCancion;
 
+/***
+ * 
+ * Implementacion de Ifachadadao, se encarga de gestionar el acceso a base de datos direccionando la peticiones a los daos particulares para cada
+ * entidad 
+ * @author F5
+ *
+ */
 public class FachadaDao implements IFachadaDao {
 
 	private DaoAlbum daoAlbum = null;
 	private DaoCancion daoCancion = null;
 	private DaoInterprete daoInterprete = null;
+	private DaoVoto daoVoto = null;
 	
 	private static FachadaDao fachada = null;
 
@@ -18,6 +29,7 @@ public class FachadaDao implements IFachadaDao {
 		daoAlbum = new DaoAlbum();
 		daoCancion = new DaoCancion();
 		daoInterprete = new DaoInterprete();
+		daoVoto = new DaoVoto();
 	}
 
 	public static IFachadaDao getFachada() {
@@ -91,6 +103,50 @@ public class FachadaDao implements IFachadaDao {
 	public ArrayList<Album> getListAlbum(String likeName) {
 		// TODO Auto-generated method stub
 		return daoAlbum.getListAlbum(likeName);
+	}
+
+	@Override
+	public ArrayList<String> getReportCancionXFecha(GregorianCalendar fechaIni,
+			GregorianCalendar fechafin) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> getReportAlbumXFecha(GregorianCalendar fechaIni,
+			GregorianCalendar fechafin) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> getReportInterpreteAlbum(Interprete interprete) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> getReportInterpreteCancion(Interprete interprete) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> getReportCancinesAlbum(Album album) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String registrarVotoCancion(ArrayList<VotoCancion> listaVotosCancion) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String registrarVotoAlbum(ArrayList<VotoAlbum> listaVotosAlbum) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
