@@ -35,7 +35,7 @@ class DaoCancion {
 
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
 			interpretes = "";
-			
+
 			while (result.next()) {
 				interpretes += result.getString("nombre");
 			}
