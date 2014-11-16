@@ -125,14 +125,23 @@ public class PanelCrear extends JPanel {
 					return;
 				}
 
-				Cancion cancion = cp.getCancion(2);
+				Cancion cancion = cp.getCancion(id);
 
 				if (cancion == null) {
 					JOptionPane.showMessageDialog(null,
 							"El ID de la canción es incorrecto",
 							"Canción no Existe", JOptionPane.ERROR_MESSAGE);
 				} else {
-
+					for (int i = 0; i < album.getListCancion().size(); i++) {
+						if (album.getListCancion().get(i).getId() == (cancion
+								.getId())) {
+							JOptionPane.showMessageDialog(null,
+									"Ya ha agregado esta canción",
+									"Error de Agregación",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+					}
 					lista2.add(cancion);
 					album.addCancion(cancion);
 					fillList2(lista2);
@@ -177,6 +186,21 @@ public class PanelCrear extends JPanel {
 					inter.setName(a[i].trim());
 					cancion.addInterpreteNuevo(inter);
 				}
+				for (int i = 0; i < album.getListCancion().size(); i++) {
+					if (album.getListCancion().get(i).getName()
+							.equals(cancion.getName())) {
+						if (album.getListCancion().get(i)
+								.getListInterpreteNuevo()
+								.equals(cancion.getListInterpreteNuevo())) {
+							JOptionPane.showMessageDialog(null,
+									"Ya ha agregado esta canción",
+									"Error de Agregación",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+
+					}
+				}
 
 				album.addCancion(cancion);
 				lista2.add(cancion);
@@ -214,6 +238,10 @@ public class PanelCrear extends JPanel {
 				String response = cp.addToDB(album);
 				if (!response.equals("OK")) {
 					System.out.println("Error");
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Álbum agregado correctamente", "Perfecto",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -234,7 +262,7 @@ public class PanelCrear extends JPanel {
 		DefaultListModel model = new DefaultListModel();
 		for (int i = 0; i < lista.size(); i++) {
 			model.addElement(lista.get(i).getId() + " - "
-					+ lista.get(i).getName()  + " -*- "
+					+ lista.get(i).getName() + " - "
 					+ lista.get(i).getNombreInterpretes());
 		}
 		list.setModel(model);
