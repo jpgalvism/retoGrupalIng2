@@ -1,10 +1,13 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import modelo.Album;
 import modelo.Cancion;
 import modelo.Interprete;
+import modelo.VotoAlbum;
+import modelo.VotoCancion;
 
 public interface IFachadaDao {
 		
@@ -90,5 +93,62 @@ public interface IFachadaDao {
 	 * @return interprete que corresponde al id 
 	 */
 	public  Interprete getInterprete(String name);
+	
+	
+	/***
+	 * 
+	 * @param fechaIni fecha inicial para generar el reporte
+	 * @param fechafin fecha final para generar el reporte
+	 * @return list de filas del reporte
+	 */
+	public ArrayList<String> getReportCancionXFecha(GregorianCalendar fechaIni, GregorianCalendar fechafin);
+	
+	
+	/***
+	 * 
+	 * @param fechaIni fecha inicial para generar el reporte
+	 * @param fechafin fecha final para generar el reporte
+	 * @return list de filas del reporte
+	 */
+	public ArrayList<String> getReportAlbumXFecha(GregorianCalendar fechaIni, GregorianCalendar fechafin);
+	
+	/***
+	 * Reporte de interprete sacar por album
+	 * @param interprete objeto interprete para consultar el reporte
+	 * @return list filas del reporte
+	 */
+	public ArrayList<String> getReportInterpreteAlbum(Interprete interprete);
+	
+	
+	/***
+	 * Reporte de interprete sacar por cancion
+	 * @param interprete objeto interprete para consultar el reporte
+	 * @return list filas del reporte
+	 */
+	public ArrayList<String> getReportInterpreteCancion(Interprete interprete);
+	
+	/***
+	 * 
+	 * @param album objeto album del cual se debe generar el reporte
+	 * @return list filas del reporte
+	 */
+	public ArrayList<String> getReportCancinesAlbum(Album album);
+	
+	
+	/**
+	 * 
+	 * @param listaVotosCancion lista de los votos a registrar para las canciones
+	 * @return OK como respuesta en caso de poderlos registrar, mensaje de error en caso contrario
+	 */
+	public String registrarVotoCancion(ArrayList<VotoCancion> listaVotosCancion);
+	
+	
+	/**
+	 * @param listaVotosAlbum lista de los votos a registrar para las canciones
+	 * @return OK como respuesta en caso de poderlos registrar, mensaje de error en caso contrario
+	 */
+	public String registrarVotoAlbum(ArrayList<VotoAlbum> listaVotosAlbum);
+	
+	
 	
 }
