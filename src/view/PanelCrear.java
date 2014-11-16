@@ -234,9 +234,10 @@ public class PanelCrear extends JPanel {
 		DefaultListModel model = new DefaultListModel();
 		for (int i = 0; i < lista.size(); i++) {
 			model.addElement(lista.get(i).getId() + " - "
-					+ lista.get(i).getName());
+					+ lista.get(i).getName()  + " -*- "
+					+ lista.get(i).getNombreInterpretes());
 		}
-		list.setModel(model);		
+		list.setModel(model);
 	}
 
 	private void fillList2(ArrayList<Cancion> lista2) {
