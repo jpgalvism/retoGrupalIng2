@@ -236,8 +236,7 @@ public class PanelCrear extends JPanel {
 			model.addElement(lista.get(i).getId() + " - "
 					+ lista.get(i).getName());
 		}
-		list.setModel(model);
-		list2.setModel(model);
+		list.setModel(model);		
 	}
 
 	private void fillList2(ArrayList<Cancion> lista2) {
