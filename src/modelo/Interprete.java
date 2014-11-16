@@ -3,7 +3,7 @@ package modelo;
 public class Interprete {
 
 	
-	private int id;
+	private int id = -1;
 	private String name;
 	
 	
