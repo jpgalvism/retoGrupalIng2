@@ -179,7 +179,7 @@ public class FachadaP {
 		mnReportes.add(mntmReportePorCancin);
 
 		JMenuItem mntmReportePorlbum = new JMenuItem(
-				"Reporte por Ã�lbum (Rango de Fechas)");
+				"Reporte por Álbum (Rango de Fechas)");
 		mntmReportePorlbum.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
