@@ -1,13 +1,22 @@
 package view;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import modelo.Cancion;
+import modelo.Interprete;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class PanelReportePorInterprete extends JPanel {
 	private JTextField textField;
+	
 
 	/**
 	 * Create the panel.
@@ -15,7 +24,7 @@ public class PanelReportePorInterprete extends JPanel {
 	public PanelReportePorInterprete() {
 		setLayout(null);
 		
-		JLabel lblNombreDelIntrprete = new JLabel("Nombre del IntÃ©rprete: ");
+		JLabel lblNombreDelIntrprete = new JLabel("Nombre del Intérprete: ");
 		lblNombreDelIntrprete.setBounds(12, 28, 279, 15);
 		add(lblNombreDelIntrprete);
 		
@@ -33,5 +42,6 @@ public class PanelReportePorInterprete extends JPanel {
 		textField.setColumns(10);
 
 	}
+	
 
 }
