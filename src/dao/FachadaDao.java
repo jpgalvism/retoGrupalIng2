@@ -22,6 +22,7 @@ public class FachadaDao implements IFachadaDao {
 	private DaoCancion daoCancion = null;
 	private DaoInterprete daoInterprete = null;
 	private DaoVoto daoVoto = null;
+	private DaoReporte daoReporte = null;
 	
 	private static FachadaDao fachada = null;
 
@@ -30,6 +31,7 @@ public class FachadaDao implements IFachadaDao {
 		daoCancion = new DaoCancion();
 		daoInterprete = new DaoInterprete();
 		daoVoto = new DaoVoto();
+		daoReporte = new DaoReporte();
 	}
 
 	public static IFachadaDao getFachada() {
@@ -109,44 +111,44 @@ public class FachadaDao implements IFachadaDao {
 	public ArrayList<String> getReportCancionXFecha(GregorianCalendar fechaIni,
 			GregorianCalendar fechafin) {
 		// TODO Auto-generated method stub
-		return null;
+		return daoReporte.getReportCancionXFecha(fechaIni, fechafin);
 	}
 
 	@Override
 	public ArrayList<String> getReportAlbumXFecha(GregorianCalendar fechaIni,
 			GregorianCalendar fechafin) {
 		// TODO Auto-generated method stub
-		return null;
+		return daoReporte.getReportAlbumXFecha(fechaIni, fechafin);
 	}
 
 	@Override
 	public ArrayList<String> getReportInterpreteAlbum(Interprete interprete) {
 		// TODO Auto-generated method stub
-		return null;
+		return daoReporte.getReportInterpreteAlbum(interprete);
 	}
 
 	@Override
 	public ArrayList<String> getReportInterpreteCancion(Interprete interprete) {
 		// TODO Auto-generated method stub
-		return null;
+		return daoReporte.getReportInterpreteCancion(interprete);
 	}
 
 	@Override
-	public ArrayList<String> getReportCancinesAlbum(Album album) {
+	public ArrayList<String> getReportCancionesAlbum(Album album) {
 		// TODO Auto-generated method stub
-		return null;
+		return daoReporte.getReportCancionesAlbum(album);
 	}
 
 	@Override
 	public String registrarVotoCancion(ArrayList<VotoCancion> listaVotosCancion) {
 		// TODO Auto-generated method stub
-		return null;
+		return daoVoto.registrarVotoCancion(listaVotosCancion);
 	}
 
 	@Override
 	public String registrarVotoAlbum(ArrayList<VotoAlbum> listaVotosAlbum) {
 		// TODO Auto-generated method stub
-		return null;
+		return daoVoto.registrarVotoAlbum(listaVotosAlbum);
 	}
 
 }

@@ -58,6 +58,7 @@ class DaoCancion {
 		String sql;
 		Connection conn;
 		ResultSet result = null;
+		String interpretes = "";
 
 		try {
 
@@ -79,6 +80,19 @@ class DaoCancion {
 
 			if (result != null)
 				result.close();
+
+			sql = "SELECT inter.`nombre` FROM `retogrupal`.`interpretexcancion` as cinter INNER JOIN `retogrupal`.`interprete` as inter ON cinter.`interprete_id` = inter.`id` WHERE cinter.`cancion_id` = '"
+					+ cancion.getId() + "';";
+
+			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
+
+			interpretes = "";
+			while (result.next()) {
+				interpretes += result.getString("nombre");
+			}
+
+			cancion.setNombreInterpretes(interpretes);
+
 			return cancion;
 		} catch (Exception e) {
 			// TODO: handle exception

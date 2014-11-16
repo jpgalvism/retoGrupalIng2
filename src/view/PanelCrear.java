@@ -17,6 +17,7 @@ import javax.swing.event.DocumentListener;
 
 import modelo.Album;
 import modelo.Cancion;
+import modelo.Interprete;
 import control.ControlPrincipal;
 
 public class PanelCrear extends JPanel {
@@ -26,12 +27,12 @@ public class PanelCrear extends JPanel {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private static ControlPrincipal cp = new ControlPrincipal();
-	private static ArrayList<Cancion> lista;
-	private static ArrayList<Cancion> lista2;
+	private static ArrayList<Cancion> lista = new ArrayList<Cancion>();
+	private static ArrayList<Cancion> lista2 = new ArrayList<Cancion>();
 	private static JList list;
 	private static JList list2;
 	private static JLabel label_check;
-	private static Album album;
+	private static Album album = new Album();
 
 	/**
 	 * Create the panel.
@@ -121,9 +122,10 @@ public class PanelCrear extends JPanel {
 					JOptionPane.showMessageDialog(null,
 							"El ID de la canción es incorrecto",
 							"Canción no Existe", JOptionPane.ERROR_MESSAGE);
+					return;
 				}
 
-				Cancion cancion = cp.getCancion(id);
+				Cancion cancion = cp.getCancion(2);
 
 				if (cancion == null) {
 					JOptionPane.showMessageDialog(null,
@@ -131,8 +133,8 @@ public class PanelCrear extends JPanel {
 							"Canción no Existe", JOptionPane.ERROR_MESSAGE);
 				} else {
 
-					album.addCancion(cancion);
 					lista2.add(cancion);
+					album.addCancion(cancion);
 					fillList2(lista2);
 				}
 			}
@@ -153,7 +155,7 @@ public class PanelCrear extends JPanel {
 		textField_3.setBounds(11, 370, 218, 19);
 		add(textField_3);
 
-		JLabel label_6 = new JLabel("IntÃ©rpretes (separados por coma):");
+		JLabel label_6 = new JLabel("Intérpretes (separados por coma):");
 		label_6.setBounds(252, 343, 258, 15);
 		add(label_6);
 
@@ -163,6 +165,24 @@ public class PanelCrear extends JPanel {
 		add(textField_4);
 
 		JButton button_3 = new JButton("Añadir");
+		button_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				Cancion cancion = new Cancion();
+				String nombre = cp.normalizar(textField_3.getText());
+				cancion.setName(nombre);
+				String a[] = textField_4.getText().split(",");
+				for (int i = 0; i < a.length; i++) {
+					Interprete inter = new Interprete();
+					inter.setName(a[i].trim());
+					cancion.addInterpreteNuevo(inter);
+				}
+
+				album.addCancion(cancion);
+				lista2.add(cancion);
+				fillList2(lista2);
+			}
+		});
 		button_3.setBounds(11, 393, 117, 25);
 		add(button_3);
 
@@ -175,6 +195,28 @@ public class PanelCrear extends JPanel {
 		add(label_7);
 
 		JButton button_4 = new JButton("Crear");
+		button_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				if (textField.getText().equals("")) {
+					JOptionPane.showMessageDialog(null,
+							"Error en el Nombre del Álbum",
+							"Error de Agregación", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				if (label_check.getText().equals("Este nombre ya existe")) {
+					JOptionPane.showMessageDialog(null,
+							"Error en el Nombre del Álbum",
+							"Error de Agregación", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				album.setName(textField.getText());
+				String response = cp.addToDB(album);
+				if (!response.equals("OK")) {
+					System.out.println("Error");
+				}
+			}
+		});
 		button_4.setBounds(154, 605, 117, 25);
 		add(button_4);
 
@@ -195,7 +237,9 @@ public class PanelCrear extends JPanel {
 					+ lista.get(i).getName());
 		}
 		list.setModel(model);
+		list2.setModel(model);
 	}
+
 	private void fillList2(ArrayList<Cancion> lista2) {
 		DefaultListModel model = new DefaultListModel();
 		for (int i = 0; i < lista2.size(); i++) {
@@ -204,4 +248,5 @@ public class PanelCrear extends JPanel {
 		}
 		list2.setModel(model);
 	}
+
 }
