@@ -30,15 +30,21 @@ class DaoCancion {
 			}
 			if (result != null)
 				result.close();
+
 			sql = "SELECT inter.`nombre` FROM `retogrupal`.`interpretexcancion` as cinter INNER JOIN `retogrupal`.`interprete` as inter ON cinter.`interprete_id` = inter.`id` WHERE cinter.`cancion_id` = '"
 					+ cancion.getId() + "';";
 
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
 			interpretes = "";
 
-			while (result.next()) {
-				interpretes += result.getString("nombre");
+			if (result != null) {
+				while (result.next()) {
+					if (interpretes.length() != 0)
+						interpretes += ", ";
+					interpretes += result.getString("nombre");
+				}
 			}
+			
 			if (result != null)
 				result.close();
 
@@ -91,18 +97,21 @@ class DaoCancion {
 
 			if (cancion == null)
 				return null;
-			
-			
+
 			sql = "SELECT inter.`nombre` FROM `retogrupal`.`interpretexcancion` as cinter INNER JOIN `retogrupal`.`interprete` as inter ON cinter.`interprete_id` = inter.`id` WHERE cinter.`cancion_id` = '"
 					+ cancion.getId() + "';";
 
 			result = DataConection.getDatacon().execute_Sel_Sql(conn, sql);
 
 			interpretes = "";
-			while (result.next()) {
-				interpretes += result.getString("nombre");
+			if (result != null) {
+				while (result.next()) {
+					if (interpretes.length() != 0)
+						interpretes += ", ";
+					interpretes += result.getString("nombre");
+				}
 			}
-
+			
 			if (result != null)
 				result.close();
 
@@ -130,6 +139,9 @@ class DaoCancion {
 		String sql;
 		Connection conn;
 		ResultSet result = null;
+		ResultSet resultInter = null;
+		String interpretes = "";
+
 		ArrayList<Cancion> listCancion = null;
 		try {
 
@@ -143,9 +155,30 @@ class DaoCancion {
 
 			if (result != null) {
 				while (result.next()) {
+
 					cancion = new Cancion();
 					cancion.setId(result.getInt("id"));
 					cancion.setName(result.getString("nombre"));
+
+					sql = "SELECT inter.`nombre` FROM `retogrupal`.`interpretexcancion` as cinter INNER JOIN `retogrupal`.`interprete` as inter ON cinter.`interprete_id` = inter.`id` WHERE cinter.`cancion_id` = '"
+							+ cancion.getId() + "';";
+
+					resultInter = DataConection.getDatacon().execute_Sel_Sql(
+							conn, sql);
+					interpretes = "";
+
+					if (resultInter != null) {
+						while (resultInter.next()) {
+							if (interpretes.length() != 0)
+								interpretes += ", ";
+							interpretes += resultInter.getString("nombre");
+						}
+
+						if (resultInter != null)
+							resultInter.close();
+					}
+					cancion.setNombreInterpretes(interpretes);
+
 					listCancion.add(cancion);
 				}
 			}
