@@ -66,7 +66,7 @@ ENGINE = InnoDB DEFAULT CHARSET=latin1;
 CREATE TABLE IF NOT EXISTS `retogrupal`.`votoxcancion` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fecha` DATETIME NOT NULL,
-  `cantidad` MEDIUMTEXT NOT NULL,
+  `cantidad` int NOT NULL,
   `cancion_id` INT NOT NULL,
   PRIMARY KEY (`id`, `cancion_id`),
   INDEX `fk_votoxcancion_cancion1_idx` (`cancion_id` ASC),
@@ -81,7 +81,7 @@ ENGINE = InnoDB  DEFAULT CHARSET=latin1;
 CREATE TABLE IF NOT EXISTS `retogrupal`.`votoxalbum` (
   `id` INT NOT NULL,
   `fecha` DATETIME NOT NULL,
-  `cantidad` MEDIUMTEXT NOT NULL,
+  `cantidad` int NOT NULL,
   `album_id` INT NOT NULL,
   PRIMARY KEY (`id`, `album_id`),
   INDEX `fk_votoxalbum_album1_idx` (`album_id` ASC),
