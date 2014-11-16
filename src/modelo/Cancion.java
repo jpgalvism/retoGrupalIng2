@@ -8,6 +8,9 @@ public class Cancion {
 	private String name;
 	private ArrayList<Interprete> listInterpreteNuevo = new ArrayList<Interprete>();
 
+	private String nombreInterpretes = "";
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -32,5 +35,16 @@ public class Cancion {
 	{
 		listInterpreteNuevo.add(interprete);
 	}
+
+	public String getNombreInterpretes() {
+		return nombreInterpretes;
+	}
+
+	public void setNombreInterpretes(String nombreInterpretes) {
+		this.nombreInterpretes = nombreInterpretes;
+	}
+	
+	
+	
 
 }
