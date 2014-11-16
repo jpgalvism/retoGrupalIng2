@@ -1,17 +1,25 @@
 package view;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+
+import modelo.Album;
+import control.ControlPrincipal;
 
 
 public class PanelReportePorAlbum extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;
+	protected ArrayList<Album> lista;
+	private static ControlPrincipal cp = new ControlPrincipal();
+	private static JList list;
 
 	/**
 	 * Create the panel.
@@ -19,31 +27,24 @@ public class PanelReportePorAlbum extends JPanel {
 	public PanelReportePorAlbum() {
 		setLayout(null);
 		
-		JList list = new JList();
+		list = new JList();
 		list.setBounds(12, 88, 504, 73);
 		add(list);
 		
 		textField = new JTextField();
-		textField.getDocument().addDocumentListener(new DocumentListener() {
-			  public void changedUpdate(DocumentEvent e) {
-			    warn();
-			  }
-			  public void removeUpdate(DocumentEvent e) {
-			    warn();
-			  }
-			  public void insertUpdate(DocumentEvent e) {
-			    warn();
-			  }
-
-			  public void warn() {
-			     textField_1.setText(textField.getText());
-			  }
-			});
+		
 		textField.setColumns(10);
 		textField.setBounds(13, 57, 208, 19);
 		add(textField);
 		
 		JButton button = new JButton("Buscar");
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				lista = cp.listAlbums(textField.getText());
+				fillList(lista);
+			}
+		});
 		button.setBounds(229, 54, 117, 25);
 		add(button);
 		
@@ -68,6 +69,13 @@ public class PanelReportePorAlbum extends JPanel {
 		list_1.setBounds(12, 291, 558, 397);
 		add(list_1);
 
+	}
+	private void fillList(ArrayList<Album> lista) {
+		DefaultListModel model = new DefaultListModel();
+		for (int i = 0; i < lista.size(); i++) {
+			model.addElement(lista.get(i).getId()+ " - "+lista.get(i).getName());
+		}
+		list.setModel(model);
 	}
 
 }

@@ -47,7 +47,7 @@ public class FachadaP {
 		if (!response.equals("OK")) {
 			JOptionPane.showMessageDialog(null, "ERROR: No se puede abrir conexiÃ³n a la base de datos, por favor verifique los parametros de conexiÃ³n. \n" + response, "ConexiÃ³n BD",
 					JOptionPane.ERROR_MESSAGE);
-			//frame.dispose();
+			frame.dispose();
 		}
 
 	}
@@ -179,7 +179,7 @@ public class FachadaP {
 		mnReportes.add(mntmReportePorCancin);
 
 		JMenuItem mntmReportePorlbum = new JMenuItem(
-				"Reporte por Ã�lbum (Rango de Fechas)");
+				"Reporte por Álbum (Rango de Fechas)");
 		mntmReportePorlbum.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
