@@ -132,7 +132,7 @@ public interface IFachadaDao {
 	 * @param album objeto album del cual se debe generar el reporte
 	 * @return list filas del reporte
 	 */
-	public ArrayList<String> getReportCancinesAlbum(Album album);
+	public ArrayList<String> getReportCancionesAlbum(Album album);
 	
 	
 	/**
