@@ -214,9 +214,8 @@ class DaoCancion {
 				return false;
 
 			conn = DataConection.getDatacon().getCon();
-			if (getCancion(cancion.getName()) != null) {
-				return false;
-			}
+			
+			
 			sql = "INSERT INTO `retogrupal`.`cancion`(`nombre`) VALUES( " + "'"
 					+ cancion.getName() + "');";
 			if (!DataConection.getDatacon().execute_Ins_Upd_Del_Sql(conn, sql)) {
