@@ -2,8 +2,11 @@ package control;
 
 import java.util.ArrayList;
 
+import com.mysql.fabric.xmlrpc.base.Array;
+
 import modelo.Album;
 import modelo.Cancion;
+import modelo.Interprete;
 import dao.FachadaDao;
 import dao.IFachadaDao;
 
@@ -44,5 +47,20 @@ public class ControlPrincipal {
 	
 	public String addToDB(Album album){
 		return dao.addAlbum(album);
+		
 	}
+	
+	public ArrayList<String> getReportInterpreteAlbum(Interprete interprete){
+		return dao.getReportInterpreteAlbum(interprete);
+	}
+	public Interprete getInterprete(String name){
+		return dao.getInterprete(name);
+		
+	}
+
+	public ArrayList<String> getReportInterpreteCancion(Interprete interprete) {
+		// TODO Auto-generated method stub
+		return dao.getReportInterpreteCancion(interprete);
+	}
+	
 }
