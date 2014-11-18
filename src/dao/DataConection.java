@@ -61,9 +61,10 @@ class DataConection {
 			pst.execute(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("execute_Ins_Upd_Del_Sql--Error:"
-					+ e.getLocalizedMessage());
+			System.out.println("execute_Ins_Upd_Del_Sql--Error: sql: " + sql
+					+ "  ERROR: " + e.getLocalizedMessage());
 			e.printStackTrace();
+			return false;
 		}
 
 		return true;
