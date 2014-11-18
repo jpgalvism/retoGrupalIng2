@@ -189,8 +189,8 @@ public class PanelCrear extends JPanel {
 				for (int i = 0; i < album.getListCancion().size(); i++) {
 					if (album.getListCancion().get(i).getName()
 							.equals(cancion.getName())) {
-						if (album.getListCancion().get(i).getInterpretesNuevo()
-								.equals(cancion.getInterpretesNuevo())) {
+						if (album.getListCancion().get(i).getNombreInterpretes()
+								.equals(cancion.getNombreInterpretes())) {
 							JOptionPane.showMessageDialog(null,
 									"Ya ha agregado esta canción",
 									"Error de Agregación",
