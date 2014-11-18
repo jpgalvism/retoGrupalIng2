@@ -79,7 +79,7 @@ ENGINE = InnoDB  DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE IF NOT EXISTS `retogrupal`.`votoxalbum` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `fecha` DATETIME NOT NULL,
   `cantidad` int NOT NULL,
   `album_id` INT NOT NULL,
