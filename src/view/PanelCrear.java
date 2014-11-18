@@ -237,7 +237,9 @@ public class PanelCrear extends JPanel {
 				album.setName(textField.getText());
 				String response = cp.addToDB(album);
 				if (!response.equals("OK")) {
-					System.out.println("Error");
+					JOptionPane.showMessageDialog(null,
+							response, "Agregar Álbum",
+							JOptionPane.ERROR_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Álbum agregado correctamente", "Perfecto",
