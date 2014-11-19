@@ -170,7 +170,7 @@ class DaoReporte {
 			conn = DataConection.getDatacon().getCon();
 			listReport = new ArrayList<String>();
 			sql = "SELECT can.`id`,can.`nombre`,sum(cantidad) as cantidad FROM `retogrupal`.`votoxcancion` as vtcan INNER JOIN `retogrupal`.`cancion` as can on vtcan.`cancion_id` = can.`id` "
-					+ " INNER JOIN `retogrupal`.`interpretexcancion` as ic ON ic.`cancion_id` = can.`cancion_id` WHERE ic.`interprete_id` = '"
+					+ " INNER JOIN `retogrupal`.`interpretexcancion` as ic ON ic.`cancion_id` = can.`id` WHERE ic.`interprete_id` = '"
 					+ interprete.getId()
 					+ "' group by can.`id`,can.`nombre` order by sum(cantidad) desc";
 
