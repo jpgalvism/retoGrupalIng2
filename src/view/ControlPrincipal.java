@@ -1,12 +1,15 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import com.mysql.fabric.xmlrpc.base.Array;
 
 import modelo.Album;
 import modelo.Cancion;
 import modelo.Interprete;
+import modelo.VotoAlbum;
+import modelo.VotoCancion;
 import dao.FachadaDao;
 import dao.IFachadaDao;
 
@@ -27,6 +30,11 @@ public class ControlPrincipal {
 
 	public Album getAlbum(String text) {
 		return dao.getAlbum(text);
+		
+	}
+	
+	public Album getAlbum(int id) {
+		return dao.getAlbum(id);
 		
 	}
 
@@ -59,8 +67,27 @@ public class ControlPrincipal {
 	}
 
 	public ArrayList<String> getReportInterpreteCancion(Interprete interprete) {
-		// TODO Auto-generated method stub
+		
 		return dao.getReportInterpreteCancion(interprete);
 	}
-	
+
+	public ArrayList<String> getReportAlbum(Album album) {
+		
+		return dao.getReportCancionesAlbum(album);
+		
+	}
+	public void registrarVotosAlbum(ArrayList<VotoAlbum> array){
+		dao.registrarVotoAlbum(array);
+	}
+	public ArrayList<String> getReportAlbumByDate(GregorianCalendar fechaini,GregorianCalendar fechafin){
+		return dao.getReportAlbumXFecha(fechaini, fechafin);
+	}
+	public ArrayList<String> getReportCancionByDate(GregorianCalendar fechaini,GregorianCalendar fechafin){
+		return dao.getReportCancionXFecha(fechaini, fechafin);
+	}
+
+	public void registrarVotosCancion(ArrayList<VotoCancion> array) {
+		dao.registrarVotoCancion(array);
+		
+	}
 }
