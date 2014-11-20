@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import modelo.Album;
-import control.ControlPrincipal;
 
 
 public class PanelReportePorAlbum extends JPanel {

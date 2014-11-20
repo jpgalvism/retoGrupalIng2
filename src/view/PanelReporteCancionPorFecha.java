@@ -13,7 +13,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import modelo.Cancion;
-import control.ControlPrincipal;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
