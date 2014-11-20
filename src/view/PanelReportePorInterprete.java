@@ -8,8 +8,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import control.ControlPrincipal;
 import modelo.Cancion;
 import modelo.Interprete;
 

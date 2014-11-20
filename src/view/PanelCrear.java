@@ -18,7 +18,6 @@ import javax.swing.event.DocumentListener;
 import modelo.Album;
 import modelo.Cancion;
 import modelo.Interprete;
-import control.ControlPrincipal;
 
 public class PanelCrear extends JPanel {
 	private JTextField textField;
