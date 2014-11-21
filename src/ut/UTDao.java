@@ -29,10 +29,10 @@ public class UTDao {
 	public void testAddAlbum() {
 		try {
 			Interprete inter = new Interprete();
-			inter.setName("pruebas 1");
+			inter.setName("inter 1");
 
 			Cancion can = new Cancion();
-			can.setName("c");
+			can.setName("can1");
 
 			can.addInterpreteNuevo(inter);
 
@@ -66,6 +66,29 @@ public class UTDao {
 		try {
 		
 			assertTrue(dao.getListAlbum("pruebas").size() == 1);
+		} catch (Exception e) {
+			// TODO: handle exception
+			fail("ERROR: " + e.getMessage());
+		}
+	}
+	
+	
+	@Test
+	public void testgetCancion() {
+		try {
+		
+			assertTrue(dao.getCancion("can1") != null);
+		} catch (Exception e) {
+			// TODO: handle exception
+			fail("ERROR: " + e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testgetInterprete() {
+		try {
+		
+			assertTrue(dao.getInterprete("inter 1") != null);
 		} catch (Exception e) {
 			// TODO: handle exception
 			fail("ERROR: " + e.getMessage());
