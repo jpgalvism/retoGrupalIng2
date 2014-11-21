@@ -100,10 +100,10 @@ class DaoVoto {
 
 			if (!DataConection.getDatacon().execute_Ins_Upd_Del_Sql(conn, sql)) {
 				System.out
-						.println("addVotoAlbum--Error al crear el interprete");
+						.println("addVotoAlbum--Error al crear registrar el voto");
 				return false;
 			}
-			System.out.println("interprete creado exitosamente.");
+			System.out.println("Voto correcto.");
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -130,10 +130,10 @@ class DaoVoto {
 
 			if (!DataConection.getDatacon().execute_Ins_Upd_Del_Sql(conn, sql)) {
 				System.out
-						.println("addVotoCancion--Error al crear el interprete");
+						.println("addVotoCancion--Error al crear registrar el voto");
 				return false;
 			}
-			System.out.println("interprete creado exitosamente.");
+			System.out.println("Voto correcto.");
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
