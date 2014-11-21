@@ -66,6 +66,14 @@ public class PanelReportePorInterprete extends JPanel {
 
 	}
 	private void fillCancion(ArrayList<String> reportInterpreteCancion) {
+		if (reportInterpreteCancion.size() == 0)
+		{
+			JOptionPane.showMessageDialog(null,
+					"No existe información para mostrar de canción",
+					"Reporte", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		
 		DefaultListModel model = new DefaultListModel();
 		for (int i = 0; i < reportInterpreteCancion.size(); i++) {
 			model.addElement(reportInterpreteCancion.get(i));
@@ -75,6 +83,15 @@ public class PanelReportePorInterprete extends JPanel {
 	}
 
 	private void fillAlbum(ArrayList<String> reportInterpreteAlbum) {
+		
+		if (reportInterpreteAlbum.size() == 0)
+		{
+			JOptionPane.showMessageDialog(null,
+					"No existe información para mostrar de álbum",
+					"Reporte", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		
 		DefaultListModel model = new DefaultListModel();
 		for (int i = 0; i < reportInterpreteAlbum.size(); i++) {
 			model.addElement(reportInterpreteAlbum.get(i));

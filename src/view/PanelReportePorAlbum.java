@@ -7,6 +7,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -70,6 +71,14 @@ public class PanelReportePorAlbum extends JPanel {
 
 	}
 	private void fillList(ArrayList<Album> lista) {
+		
+		if (lista.size() == 0)
+		{
+			JOptionPane.showMessageDialog(null,
+					"No existe información para mostrar.",
+					"Reporte", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
 		DefaultListModel model = new DefaultListModel();
 		for (int i = 0; i < lista.size(); i++) {
 			model.addElement(lista.get(i).getId()+ " - "+lista.get(i).getName());
