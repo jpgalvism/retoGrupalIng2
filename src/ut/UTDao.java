@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 import modelo.Album;
 import modelo.Cancion;
 import modelo.Interprete;
+import modelo.VotoAlbum;
 import modelo.VotoCancion;
 
 import org.junit.Test;
@@ -136,6 +137,29 @@ public class UTDao {
 			list.add(vtc);
 
 			assertTrue(dao.registrarVotoCancion(list).equals("OK"));
+		} catch (Exception e) {
+			// TODO: handle exception
+			fail("ERROR: " + e.getMessage());
+		}
+	}
+
+	
+	@Test
+	public void testregistrarVotoAlbum() {
+		try {
+			ArrayList<VotoAlbum> list = new ArrayList<VotoAlbum>();
+			VotoAlbum vta = new VotoAlbum();
+			Album alb = dao.getAlbum("pruebas alb");
+			GregorianCalendar fecha = new GregorianCalendar();
+			fecha.setTime(GregorianCalendar.getInstance().getTime());
+
+			vta.setAlbum(alb);
+			vta.setFecha(fecha);
+			vta.setCantidad(2);
+			
+			list.add(vta);
+
+			assertTrue(dao.registrarVotoAlbum(list).equals("OK"));
 		} catch (Exception e) {
 			// TODO: handle exception
 			fail("ERROR: " + e.getMessage());
