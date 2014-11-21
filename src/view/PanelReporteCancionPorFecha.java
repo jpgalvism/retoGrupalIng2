@@ -91,6 +91,14 @@ public class PanelReporteCancionPorFecha extends JPanel {
 	}
 
 	private void fillList2(ArrayList<String> reportAlbum) {
+		
+		if (reportAlbum.size() == 0)
+		{
+			JOptionPane.showMessageDialog(null,
+					"No existe información para mostrar.",
+					"Reporte", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
 		DefaultListModel model = new DefaultListModel();
 		for (int i = 0; i < reportAlbum.size(); i++) {
 			model.addElement(reportAlbum.get(i));
