@@ -2,9 +2,6 @@ package view;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-
-import com.mysql.fabric.xmlrpc.base.Array;
-
 import modelo.Album;
 import modelo.Cancion;
 import modelo.Interprete;
