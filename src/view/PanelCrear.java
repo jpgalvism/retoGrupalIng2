@@ -181,14 +181,24 @@ public class PanelCrear extends JPanel {
 				cancion.setName(nombre);
 				String a[] = textField_4.getText().split(",");
 				for (int i = 0; i < a.length; i++) {
-					Interprete inter = new Interprete();
-					inter.setName(a[i].trim());
-					cancion.addInterpreteNuevo(inter);
+					Interprete inter;
+					if (!a[i].trim().equals("")) {
+						inter = cp.getInterprete(a[i]);
+						if (inter == null) {
+							inter = new Interprete();
+							inter.setName(a[i].trim());
+						}
+
+						cancion.addInterpreteNuevo(inter);
+					}
+
 				}
+				
 				for (int i = 0; i < album.getListCancion().size(); i++) {
 					if (album.getListCancion().get(i).getName()
 							.equals(cancion.getName())) {
-						if (album.getListCancion().get(i).getNombreInterpretes()
+						if (album.getListCancion().get(i)
+								.getNombreInterpretes()
 								.equals(cancion.getNombreInterpretes())) {
 							JOptionPane.showMessageDialog(null,
 									"Ya ha agregado esta canción",
@@ -199,7 +209,13 @@ public class PanelCrear extends JPanel {
 
 					}
 				}
-
+				if (cancion.getListInterpreteNuevo().size()==0) {
+					JOptionPane.showMessageDialog(null,
+							"La canción no tiene ningún intérprete válido",
+							"Error de Agregación",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				album.addCancion(cancion);
 				lista2.add(cancion);
 				fillList2(lista2);
@@ -235,9 +251,8 @@ public class PanelCrear extends JPanel {
 				album.setName(textField.getText());
 				String response = cp.addToDB(album);
 				if (!response.equals("OK")) {
-					JOptionPane.showMessageDialog(null,
-							response, "Agregar Álbum",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, response,
+							"Agregar Álbum", JOptionPane.ERROR_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Álbum agregado correctamente", "Perfecto",
@@ -283,20 +298,21 @@ public class PanelCrear extends JPanel {
 		}
 		list2.setModel(model);
 	}
+
 	private void clean() {
 		textField.setText("");
 		textField_1.setText("");
 		textField_2.setText("");
 		textField_3.setText("");
 		textField_4.setText("");
-		album=new Album();
+		album = new Album();
 		DefaultListModel model = new DefaultListModel();
 		list.setModel(model);
 		list2.setModel(model);
 		label_check.setText("");
 		lista.clear();
 		lista2.clear();
-		
+
 	}
 
 }
