@@ -1,4 +1,5 @@
 package view;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -59,81 +60,95 @@ public class PanelCargaCancion extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				ArrayList<VotoCancion> array = new ArrayList<VotoCancion>();
 				try {
-				    FileInputStream fis = new FileInputStream(textField.getText());
-				    DataInputStream dis = new DataInputStream(fis);
-				    BufferedReader buffer = new BufferedReader(new InputStreamReader(
-					    dis));
-				    String str;
-				    
+					FileInputStream fis = new FileInputStream(textField
+							.getText());
+					DataInputStream dis = new DataInputStream(fis);
+					BufferedReader buffer = new BufferedReader(
+							new InputStreamReader(dis));
+					String str;
 
-				    while ((str = buffer.readLine()) != null) {
-				    		String[] a = str.split("\\:@:");
-				    		if (a.length!=3) {
-				    			JOptionPane.showMessageDialog(null,
-										"Error en el archivo",
-										"Error de Carga", JOptionPane.ERROR_MESSAGE);
-								return;
-							}
-				    		int id = -1;
-				    		try {
-								id = Integer.parseInt(a[0]);
-							} catch (Exception e) {
-								JOptionPane.showMessageDialog(null,
-										"Error en el archivo",
-										"Error de Carga", JOptionPane.ERROR_MESSAGE);
-								return;
-							}
-				    		int votos = -1;
-				    		try {
-								votos = Integer.parseInt(a[1]);
-							} catch (Exception e) {
-								JOptionPane.showMessageDialog(null,
-										"Error en el archivo",
-										"Error de Carga", JOptionPane.ERROR_MESSAGE);
-								return;
-							}
-				    		GregorianCalendar fecha = new GregorianCalendar();
-				    		try {
-								DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-								Date date = df.parse(a[2]);
-								
-								fecha.setTime(date);
-							} catch (Exception e) {
-								JOptionPane.showMessageDialog(null,
-										"Error en el archivo",
-										"Error de Carga", JOptionPane.ERROR_MESSAGE);
-								return;
-							}
-				    		VotoCancion vc = new VotoCancion();
-				    		Cancion cancion = new Cancion();
-				    		cancion = cp.getCancion(id);
-				    		if (cancion == null) {
-				    			JOptionPane.showMessageDialog(null,
-										"Error en el archivo",
-										"Error de Carga", JOptionPane.ERROR_MESSAGE);
-								return;
-							}
-				    		if (votos<1) {
-				    			JOptionPane.showMessageDialog(null,
-										"Error en el archivo",
-										"Error de Carga", JOptionPane.ERROR_MESSAGE);
-								return;
-							}
-				    		vc.setCancion(cancion);
-				    		vc.setCantidad(votos);
-				    		vc.setFecha(fecha);
-				    		array.add(vc);
-				    }
+					while ((str = buffer.readLine()) != null) {
+						String[] a = str.split("\\:@:");
+						if (a.length != 3) {
+							JOptionPane.showMessageDialog(null,
+									"Error en el archivo", "Error de Carga",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						int id = -1;
+						try {
+							id = Integer.parseInt(a[0]);
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null,
+									"Error en el archivo", "Error de Carga",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						int votos = -1;
+						try {
+							votos = Integer.parseInt(a[1]);
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null,
+									"Error en el archivo", "Error de Carga",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						GregorianCalendar fecha = new GregorianCalendar();
+						try {
+							DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+							Date date = df.parse(a[2]);
 
-				    dis.close();
-				    
+							fecha.setTime(date);
+							if (!df.format(fecha.getTime()).equals(a[2])) {
+								JOptionPane.showMessageDialog(null,
+										"Error en el archivo", "Error de Carga",
+										JOptionPane.ERROR_MESSAGE);
+								return;
+							}
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null,
+									"Error en el archivo", "Error de Carga",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						VotoCancion vc = new VotoCancion();
+						Cancion cancion = new Cancion();
+						cancion = cp.getCancion(id);
+						if (cancion == null) {
+							JOptionPane.showMessageDialog(null,
+									"Error en el archivo", "Error de Carga",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						if (votos < 1) {
+							JOptionPane.showMessageDialog(null,
+									"Error en el archivo", "Error de Carga",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						vc.setCancion(cancion);
+						vc.setCantidad(votos);
+						vc.setFecha(fecha);
+						array.add(vc);
+					}
+
+					dis.close();
+
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null,
-							"Error en el archivo",
+					JOptionPane.showMessageDialog(null, "Error en el archivo",
 							"Error de Carga", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				cp.registrarVotosCancion(array);
+				String response = cp.registrarVotosCancion(array);
+				if (response.equals("OK")) {
+					JOptionPane.showMessageDialog(null,
+							"Votos Cargados correctamente", "Perfecto",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, response,
+							"Error de Carga", JOptionPane.ERROR_MESSAGE);
+				}
+
 			}
 		});
 		btnCargarVotos.setBounds(49, 244, 138, 25);

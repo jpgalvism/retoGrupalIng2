@@ -100,6 +100,12 @@ public class PanelCargaAlbum extends JPanel {
 								Date date = df.parse(a[2]);
 								
 								fecha.setTime(date);
+								if (!df.format(fecha.getTime()).equals(a[2])) {
+									JOptionPane.showMessageDialog(null,
+											"Error en el archivo", "Error de Carga",
+											JOptionPane.ERROR_MESSAGE);
+									return;
+								}
 							} catch (Exception e) {
 								JOptionPane.showMessageDialog(null,
 										"Error en el archivo",
@@ -135,7 +141,18 @@ public class PanelCargaAlbum extends JPanel {
 							"Error de Carga", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				cp.registrarVotosAlbum(array);
+				String response = cp.registrarVotosAlbum(array);
+				if (response.equals("OK")) {
+					JOptionPane.showMessageDialog(null,
+							"Votos Cargados correctamente",
+							"Perfecto",
+							JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					JOptionPane.showMessageDialog(null,
+							response,
+							"Error de Carga",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		btnCargarVotos.setBounds(49, 244, 138, 25);

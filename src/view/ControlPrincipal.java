@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+
 import modelo.Album;
 import modelo.Cancion;
 import modelo.Interprete;
@@ -73,8 +74,8 @@ public class ControlPrincipal {
 		return dao.getReportCancionesAlbum(album);
 		
 	}
-	public void registrarVotosAlbum(ArrayList<VotoAlbum> array){
-		dao.registrarVotoAlbum(array);
+	public String registrarVotosAlbum(ArrayList<VotoAlbum> array){
+		return dao.registrarVotoAlbum(array);
 	}
 	public ArrayList<String> getReportAlbumByDate(GregorianCalendar fechaini,GregorianCalendar fechafin){
 		return dao.getReportAlbumXFecha(fechaini, fechafin);
@@ -83,8 +84,8 @@ public class ControlPrincipal {
 		return dao.getReportCancionXFecha(fechaini, fechafin);
 	}
 
-	public void registrarVotosCancion(ArrayList<VotoCancion> array) {
-		dao.registrarVotoCancion(array);
+	public String registrarVotosCancion(ArrayList<VotoCancion> array) {
+		return dao.registrarVotoCancion(array);
 		
 	}
 }
