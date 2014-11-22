@@ -242,6 +242,7 @@ public class PanelCrear extends JPanel {
 					JOptionPane.showMessageDialog(null,
 							"Álbum agregado correctamente", "Perfecto",
 							JOptionPane.INFORMATION_MESSAGE);
+					clean();
 				}
 			}
 		});
@@ -249,6 +250,12 @@ public class PanelCrear extends JPanel {
 		add(button_4);
 
 		JButton button_5 = new JButton("Cancelar");
+		button_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				clean();
+			}
+		});
 		button_5.setBounds(270, 605, 117, 25);
 		add(button_5);
 
@@ -275,6 +282,19 @@ public class PanelCrear extends JPanel {
 					+ lista2.get(i).getName());
 		}
 		list2.setModel(model);
+	}
+	private void clean() {
+		textField.setText("");
+		textField_1.setText("");
+		textField_2.setText("");
+		textField_3.setText("");
+		textField_4.setText("");
+		album=new Album();
+		DefaultListModel model = new DefaultListModel();
+		list.setModel(model);
+		list2.setModel(model);
+		label_check.setText("");
+		
 	}
 
 }
