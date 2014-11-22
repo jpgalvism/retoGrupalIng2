@@ -294,6 +294,8 @@ public class PanelCrear extends JPanel {
 		list.setModel(model);
 		list2.setModel(model);
 		label_check.setText("");
+		lista.clear();
+		lista2.clear();
 		
 	}
 
