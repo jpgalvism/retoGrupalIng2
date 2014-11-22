@@ -22,7 +22,7 @@ public class UTDao {
 	IFachadaDao dao = FachadaDao.getFachada();
 
 	@Test
-	public void testisConected() {
+	public void p1() {
 		try {
 			assertTrue(dao.isConected().equals("OK"));
 		} catch (Exception e) {
@@ -32,8 +32,10 @@ public class UTDao {
 	}
 
 	@Test
-	public void testAddAlbum() {
+	public void p2() {
 		try {
+			dao = FachadaDao.getFachada();
+			
 			Interprete inter = new Interprete();
 			inter.setName("inter 1");
 
@@ -56,7 +58,7 @@ public class UTDao {
 	}
 
 	@Test
-	public void testgetAlbum() {
+	public void p3() {
 		try {
 
 			assertTrue(dao.getAlbum("pruebas alb") != null);
@@ -67,7 +69,7 @@ public class UTDao {
 	}
 
 	@Test
-	public void testgetListAlbum() {
+	public void p4() {
 		try {
 
 			assertTrue(dao.getListAlbum("pruebas").size() == 1);
@@ -78,7 +80,7 @@ public class UTDao {
 	}
 
 	@Test
-	public void testgetCancion() {
+	public void p5() {
 		try {
 
 			assertTrue(dao.getCancion("can1") != null);
@@ -89,7 +91,7 @@ public class UTDao {
 	}
 
 	@Test
-	public void testgetListCancion() {
+	public void p6() {
 		try {
 
 			assertTrue(dao.getListCancion("can1").size() == 1);
@@ -100,7 +102,7 @@ public class UTDao {
 	}
 
 	@Test
-	public void testgetInterprete() {
+	public void p7() {
 		try {
 
 			assertTrue(dao.getInterprete("inter 1") != null);
@@ -111,7 +113,7 @@ public class UTDao {
 	}
 
 	@Test
-	public void testgetListInterprete() {
+	public void p8() {
 		try {
 
 			assertTrue(dao.getListInterprete("inter 1").size() == 1);
@@ -122,7 +124,7 @@ public class UTDao {
 	}
 
 	@Test
-	public void testregistrarVotoCancion() {
+	public void p9() {
 		try {
 			ArrayList<VotoCancion> list = new ArrayList<VotoCancion>();
 			VotoCancion vtc = new VotoCancion();
@@ -145,7 +147,7 @@ public class UTDao {
 
 	
 	@Test
-	public void testregistrarVotoAlbum() {
+	public void p10() {
 		try {
 			ArrayList<VotoAlbum> list = new ArrayList<VotoAlbum>();
 			VotoAlbum vta = new VotoAlbum();
